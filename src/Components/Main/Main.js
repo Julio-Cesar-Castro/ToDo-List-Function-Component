@@ -3,10 +3,12 @@ import Trash from "../../assets/lixeira.png";
 import TrashAll from "../../assets/teste.png";
 import Edit from "../../assets/editar.png";
 import {
+  clearAll,
   addTask,
   removeTask,
   windowEditTask,
   editText,
+  markCheck,
 } from "./utils/functions";
 import {
   MainS,
@@ -35,11 +37,16 @@ const Main = () => {
   const [Task, setTask] = useState("");
   const [List, setList] = useState([]);
   const [newEditTask, setnewEditTask] = useState("");
+  const [isChecked, setisChecked] = useState(false);
   const providerList = useMemo(() => ({ List, setList }), [List, setList]);
   const providerTask = useMemo(() => ({ Task, setTask }), [Task, setTask]);
   const providernewEditTask = useMemo(
     () => ({ newEditTask, setnewEditTask }),
     [newEditTask, setnewEditTask]
+  );
+  const providerCheck = useMemo(
+    () => ({ isChecked, setisChecked }),
+    [isChecked, setisChecked]
   );
 
   // console.log("Informações do input", TaskInformation);
@@ -59,7 +66,7 @@ const Main = () => {
             Add
           </TaskButton>
         </form>
-        <ButtonRemoveAll>
+        <ButtonRemoveAll onClick={() => clearAll(providerList)}>
           <FigureRemove>
             <ImgRemove src={TrashAll} alt="Icon to remove task" />
           </FigureRemove>
@@ -69,8 +76,14 @@ const Main = () => {
         <TaskBody>
           <Ul>
             <LeftSideTask>
-              <input type="checkbox" />
-              <WriteTask>{item.TaskInformation}</WriteTask>
+              <input
+                className="checkInformation"
+                type="checkbox"
+                onClick={() => markCheck(providerCheck)}
+              />
+              <WriteTask className="unChecked">
+                {item.TaskInformation}
+              </WriteTask>
             </LeftSideTask>
             <RightSideTask>
               <ButtonRemove onClick={() => removeTask(item.id, providerList)}>

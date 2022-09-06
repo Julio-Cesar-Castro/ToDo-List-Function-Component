@@ -99,6 +99,14 @@ export const RightSideTask = styled.div`
 export const WriteTask = styled.li`
   list-style: none;
   font-size: 18px;
+
+  .unChecked {
+    text-decoration: none;
+  }
+
+  .Checked {
+    text-decoration: line-through;
+  }
 `;
 
 export const ButtonRemove = styled.button`

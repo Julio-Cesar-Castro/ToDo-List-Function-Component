@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+const clearAll = ({ List, setList }) => {
+  setList([]);
+};
+
 const addTask = ({ Task, setTask }, { List, setList }) => {
   const TaskInformation = { TaskInformation: Task, id: Math.random() };
   if (Task === "") {
@@ -31,4 +35,12 @@ const editText = ({ List, setList }, { newEditTask, setnewEditTask }) => {
   );
 };
 
-export { addTask, removeTask, windowEditTask, editText };
+const markCheck = ({ isChecked, setisChecked }) => {
+  const Check = document.querySelector(".checkInformation");
+  const Text = document.querySelector(".Check");
+  if (Check === !Check && Text.style.className === ".unCheck") {
+    Text.document.style.className = ".Checked";
+  }
+};
+
+export { clearAll, addTask, removeTask, windowEditTask, editText, markCheck };
